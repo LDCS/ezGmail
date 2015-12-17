@@ -1,7 +1,10 @@
 # ezGmail
 ezGmail is a golang wrapper for the gmail API.  It is designed to be an easy way to access received email and process them.
+Easy refers to predefined filters to narrow down which mails will be selected and easy way to extract body and attachments from the nested structure of emails.
 
 The package is based on the Gmail API,  and so uses OAuth 2.0 authentication,  and the code is based on sample program provided in Gmail API's Go quickstart guide.
+
+We wrote this package to enable us to quickly write scripts that process specific messages automatically.  It enables us to setup an automated workflow where we are unable to avoid email as the communication medium.
 
 To download ezGmail and its dependencies,  use the command:
     ```go get github.com/LDCS/ezGmail```
