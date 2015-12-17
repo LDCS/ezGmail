@@ -219,12 +219,12 @@ func (gs *GmailService) GetListOnly () *gmail.ListMessagesResponse {
 	gsCall := gs.srv.Users.Messages.List(gs.sUser).MaxResults(gs.iMaxResults)
 	if len(gs.sLabel)           > 0 { gsCall = gsCall.LabelIds(gs.sLabel) }
 	
-	if len(gs.sFrom)            > 0 { qStr += "from:"		+ gs.sFrom		+ " " }
-	if len(gs.sTo)              > 0 { qStr += "to:"		+ gs.sTo		+ " " }
-	if len(gs.sOlder)           > 0 { qStr += "older:"		+ gs.sOlder		+ " " }
-	if len(gs.sNewer)           > 0 { qStr += "newer:"		+ gs.sNewer		+ " " }
-	if len(gs.sOlderRel)        > 0 { qStr += "older_than:"	+ gs.sOlderRel		+ " " }
-	if len(gs.sNewerRel)        > 0 { qStr += "newer_than:"	+ gs.sNewerRel		+ " " }
+	if len(gs.sFrom)            > 0 { qStr += "from:"		+ gs.sFrom		+ " "   }
+	if len(gs.sTo)              > 0 { qStr += "to:"		        + gs.sTo		+ " "   }
+	if len(gs.sOlder)           > 0 { qStr += "older:"		+ gs.sOlder		+ " "   }
+	if len(gs.sNewer)           > 0 { qStr += "newer:"		+ gs.sNewer		+ " "   }
+	if len(gs.sOlderRel)        > 0 { qStr += "older_than:"	        + gs.sOlderRel		+ " "   }
+	if len(gs.sNewerRel)        > 0 { qStr += "newer_than:"	        + gs.sNewerRel		+ " "   }
 	if len(gs.sSubject)         > 0 { qStr += "subject:\""		+ gs.sSubject		+ "\" " }
 	if len(gs.sInPlace)         > 0 { qStr += "in:"			+ gs.sInPlace		+ " "	}
 	if len(gs.sLarger)          > 0 { qStr += "larger:"		+ gs.sLarger		+ " "	}
@@ -233,7 +233,6 @@ func (gs *GmailService) GetListOnly () *gmail.ListMessagesResponse {
 	if len(gs.sMatch)           > 0 { qStr += " "			+ gs.sMatch		+ " "	}
 	if len(gs.sMatchExact)      > 0 { qStr += " "                   + gs.sMatchExact	+ " "	}
 	if gs.sHasAttachment            { qStr += "has:attachment "					}
-	fmt.Println("Query string:  ", qStr)
 	if len(qStr) > 0 { gsCall = gsCall.Q(qStr) }
 	do, err := gsCall.Do()
         if err != nil {
