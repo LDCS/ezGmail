@@ -252,10 +252,12 @@ type GmailAttachment struct {
 	bDownloaded   bool    
 }
 
-func (ga *GmailAttachment) GetFilename   ()  string  { return ga.sFilename    }
-func (ga *GmailAttachment) GetMimeType   ()  string  { return ga.sMimeType    }
-func (ga *GmailAttachment) GetSize       ()  int64   { return ga.iSize        }
-func (ga *GmailAttachment) IsDownloaded  ()  bool    { return ga.bDownloaded  }
+func (ga *GmailAttachment) GetFilename     ()  string  { return ga.sFilename     }
+func (ga *GmailAttachment) GetMimeType     ()  string  { return ga.sMimeType     }
+func (ga *GmailAttachment) GetSize         ()  int64   { return ga.iSize         }
+func (ga *GmailAttachment) IsDownloaded    ()  bool    { return ga.bDownloaded   }
+func (ga *GmailAttachment) GetAttachmentId ()  string  { return ga.sAttachmentId }
+func (ga *GmailAttachment) GetMessageId    ()  string  { return ga.sMessageId    }
 
 func (ga *GmailAttachment) GetData() []byte {
 	if ga.bDownloaded { return ga.sData }
@@ -288,3 +290,4 @@ func (gm *GmailMessage) GetBodyText	() []byte		{ return gm.sBodyText			}
 func (gm *GmailMessage) GetBodyHtml	() []byte		{ return gm.sBodyHtml			}
 func (gm *GmailMessage) GetAttachments	() []*GmailAttachment	{ return gm.lAttachment			}
 func (gm *GmailMessage) GetRawMessage	() *gmail.Message	{ return gm.sRaw			}
+func (gm *GmailMessage) GetMessageId	() string               { return gm.sMessageId                  }
