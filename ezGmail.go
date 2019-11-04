@@ -115,29 +115,36 @@ type GmailService struct {
 	sHasAttachment   bool
 }
 
-func (gs *GmailService) InitSrv() {
+/*
+	credentialFilePath is the loaction of 'credential-json' file
+ */
+func (gs *GmailService) InitSrvWithCrentialAt(credentialFilePath string) {
 	// Connect and create gmail.Service object
-        ctx := context.Background()
+	ctx := context.Background()
 
-        b, err := ioutil.ReadFile("client_secret.json")
-        if err != nil {
-                log.Fatalf("Unable to read client secret file: %v", err)
-        }
+	b, err := ioutil.ReadFile(credentialFilePath)
+	if err != nil {
+		log.Fatalf("Unable to read client secret file at %s : %v", credentialFilePath,err)
+	}
 
-        config, err := google.ConfigFromJSON(b, gmail.GmailReadonlyScope)
-        if err != nil {
-                log.Fatalf("Unable to parse client secret file to config: %v", err)
-        }
-        client := getClient(ctx, config)
+	config, err := google.ConfigFromJSON(b, gmail.GmailReadonlyScope)
+	if err != nil {
+		log.Fatalf("Unable to parse client secret file to config: %v", err)
+	}
+	client := getClient(ctx, config)
 
-        gs.srv, err = gmail.New(client)
-        if err != nil {
-                log.Fatalf("Unable to retrieve gmail Client %v", err)
-        }
+	gs.srv, err = gmail.New(client)
+	if err != nil {
+		log.Fatalf("Unable to retrieve gmail Client %v", err)
+	}
 
 	// Assign Defaults
 	gs.iMaxResults = 50
 	gs.sUser       = "me"
+}
+
+func (gs *GmailService) InitSrv() {
+	gs.InitSrvWithCrentialAt("client_secret.json")
 }
 
 func (gs *GmailService) MaxResults	(maxres         int64 ) *GmailService	{ gs.iMaxResults	= maxres    ; return gs }
