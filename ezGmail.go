@@ -122,7 +122,7 @@ func (gs *GmailService) InitSrv(credentialFilePath string) {
 	// Connect and create gmail.Service object
         ctx := context.Background()
 
-        b, err := ioutil.ReadFile("client_secret.json")
+        b, err := ioutil.ReadFile(credentialFilePath)
         if err != nil {
                 log.Fatalf("Unable to read client secret file: %v", err)
         }
