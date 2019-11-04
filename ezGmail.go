@@ -115,7 +115,10 @@ type GmailService struct {
 	sHasAttachment   bool
 }
 
-func (gs *GmailService) InitSrv() {
+/*
+	credentialFilePath is the loaction of 'credential-json' file
+ */
+func (gs *GmailService) InitSrv(credentialFilePath string) {
 	// Connect and create gmail.Service object
         ctx := context.Background()
 
